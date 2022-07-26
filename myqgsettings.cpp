@@ -3,12 +3,12 @@
 
 MyQGSettings::MyQGSettings(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::MyQGSettings)
+    mUi(new Ui::MyQGSettings)
 {
-    ui->setupUi(this);
+    mUi->setupUi(this);
 }
 
 MyQGSettings::~MyQGSettings()
 {
-    delete ui;
+    delete mUi;
 }

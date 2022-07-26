@@ -2,7 +2,7 @@
 #define MYQGSETTINGS_H
 
 #include <QWidget>
-#include <QGSettings/QGSettings>
+#include <QGSettings>
 
 namespace Ui {
 class MyQGSettings;
@@ -21,8 +21,8 @@ private slots:
     void on_btn_setSex_clicked();
 
 private:
-    Ui::MyQGSettings *ui;
-    QGSettings *m_settings
+    Ui::MyQGSettings    *mUi;
+    QGSettings          *mSettings;
 };
 
 #endif // MYQGSETTINGS_H
