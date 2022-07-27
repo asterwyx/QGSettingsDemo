@@ -6,13 +6,111 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>558</width>
-    <height>512</height>
+    <width>377</width>
+    <height>205</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MyQGSettings</string>
   </property>
+  <widget class="QPushButton" name="queryBtn">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>10</y>
+     <width>141</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>查询</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="resetBtn">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>10</y>
+     <width>141</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>重置</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="saveSexBtn">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>70</y>
+     <width>71</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>保存</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="saveAgeBtn">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>140</y>
+     <width>71</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>保存</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="sexLabel">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>80</y>
+     <width>31</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>性别</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="ageLabel">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>150</y>
+     <width>31</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>年龄</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="sexEdit">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>70</y>
+     <width>211</width>
+     <height>41</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="ageEdit">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>140</y>
+     <width>211</width>
+     <height>41</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
