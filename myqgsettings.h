@@ -16,10 +16,10 @@ public:
     explicit MyQGSettings(QWidget *parent = nullptr);
     ~MyQGSettings();
 private slots:
-    void onBtnResetInfoClicked();
-    void onBtnQueryInfoClicked();
-    void onBtnSaveSexClicked();
-    void onBtnSaveAgeClicked();
+    void on_resetBtn_clicked();
+    void on_queryBtn_clicked();
+    void on_saveSexBtn_clicked();
+    void on_saveAgeBtn_clicked();
 
 private:
     Ui::MyQGSettings    *mUi;

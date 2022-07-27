@@ -1,5 +1,7 @@
 #include "myqgsettings.h"
 #include "ui_myqgsettings.h"
+#include <QMessageBox>
+#include <QDebug>
 
 MyQGSettings::MyQGSettings(QWidget *parent) :
     QWidget(parent),
@@ -7,7 +9,7 @@ MyQGSettings::MyQGSettings(QWidget *parent) :
 {
     mUi->setupUi(this);
     mSettings = new QGSettings("com.uniontech.dde.astrea", "/com/uniontech/dde/astrea/");
-    connect(mSettings, &QGSettings::changed, [=](const QString key)
+    connect(mSettings, static_cast<void (QGSettings::*)(const QString &)>(&QGSettings::changed), [=](const QString &key)
     {
         if (key == "sex")
         {
@@ -18,13 +20,9 @@ MyQGSettings::MyQGSettings(QWidget *parent) :
             mUi->ageEdit->setText(mSettings->get(key).toString());
         }
     });
-    connect(mUi->queryBtn, &QPushButton::clicked, this, &MyQGSettings::onBtnQueryInfoClicked);
-    connect(mUi->resetBtn, &QPushButton::clicked, this, &MyQGSettings::onBtnResetInfoClicked);
-    connect(mUi->saveSexBtn, &QPushButton::clicked, this, &MyQGSettings::onBtnSaveSexClicked);
-    connect(mUi->saveAgeBtn, &QPushButton::clicked, this, &MyQGSettings::onBtnSaveAgeClicked);
 }
 
-void MyQGSettings::onBtnQueryInfoClicked()
+void MyQGSettings::on_queryBtn_clicked()
 {
     if (mSettings)
     {
@@ -35,26 +33,47 @@ void MyQGSettings::onBtnQueryInfoClicked()
     }
 }
 
-void MyQGSettings::onBtnSaveSexClicked()
+void MyQGSettings::on_saveSexBtn_clicked()
 {
     if (!mUi->sexEdit->text().isEmpty())
     {
         QString sex = mUi->sexEdit->text();
-        if (mSettings)
+        if (sex == QString::fromUtf8("男") || sex == QString::fromUtf8("女"))
         {
-            mSettings->trySet("sex", sex);
+            if (mSettings)
+            {
+                if (!(sex == mSettings->get("sex")))
+                    mSettings->trySet("sex", sex);
+            }
+        }
+        else
+        {
+            QMessageBox::critical(this, tr("错误提示"), tr("性别必须是\"男\"或者\"女\"。"), QMessageBox::Close);
         }
     }
 }
 
-void MyQGSettings::onBtnSaveAgeClicked()
+void MyQGSettings::on_saveAgeBtn_clicked()
 {
     if (!mUi->ageEdit->text().isEmpty())
     {
-        int age = mUi->ageEdit->text().toInt();
-        if (mSettings)
+        bool canConvert;
+        int age = mUi->ageEdit->text().toInt(&canConvert);
+        if (canConvert && age >= 0)
         {
-            mSettings->trySet("age", age);
+            if (age >= 200)
+            {
+                QMessageBox::warning(this, tr("警告"), tr("年龄是否有点不合实际？请检查！"), QMessageBox::Close);
+            }
+            if (mSettings)
+            {
+                if (!(mSettings->get("age") == age))
+                   mSettings->trySet("age", age);
+            }
+        }
+        else
+        {
+            QMessageBox::critical(this, tr("错误提示"), tr("年龄必须是整数"), QMessageBox::Close);
         }
     }
 }
@@ -65,7 +84,7 @@ MyQGSettings::~MyQGSettings()
     delete mSettings;
 }
 
-void MyQGSettings::onBtnResetInfoClicked()
+void MyQGSettings::on_resetBtn_clicked()
 {
     if (mSettings)
     {
